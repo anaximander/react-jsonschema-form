@@ -73,25 +73,28 @@ class ObjectField extends Component {
     }
     return (
       <fieldset>
-        {title ? <TitleField title={title}/> : null}
-        {schema.description ?
-          <div className="field-description">{schema.description}</div> : null}
-        {
-        orderedProperties.map((name, index) => {
-          return (
-            <SchemaField key={index}
-              name={name}
-              required={this.isRequired(name)}
-              schema={schema.properties[name]}
-              uiSchema={uiSchema[name]}
-              errorSchema={errorSchema[name]}
-              idSchema={idSchema[name]}
-              formData={this.state[name]}
-              onChange={this.onPropertyChange(name)}
-              registry={this.props.registry} />
-          );
-        })
-      }</fieldset>
+          {title ? <TitleField title={title}/> : null}
+          {schema.description ?
+            <div className="field-description">{schema.description}</div> : null}
+          <div className="fieldset-flexbox-shim">
+          {
+            orderedProperties.map((name, index) => {
+              return (
+                <SchemaField key={index}
+                  name={name}
+                  required={this.isRequired(name)}
+                  schema={schema.properties[name]}
+                  uiSchema={uiSchema[name]}
+                  errorSchema={errorSchema[name]}
+                  idSchema={idSchema[name]}
+                  formData={this.state[name]}
+                  onChange={this.onPropertyChange(name)}
+                  registry={this.props.registry} />
+              );
+            })
+          }
+          </div>
+      </fieldset>
     );
   }
 }
